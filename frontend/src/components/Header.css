@@ -1,0 +1,118 @@
+/* WRAPPER */
+.header-wrapper {
+    position: fixed;
+
+    display: flex;
+
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    width: 100vw;
+    height: 80px;
+
+    background-color: var(--black-00);
+}
+
+/* LEFT-CONTAINER */
+.header-wrapper .left-container {
+    width: 250px;
+    height: 80px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+.header-wrapper .left-container h1 {
+    color: white;
+}
+.header-wrapper .left-container h1 span {
+    color: var(--yellow-00);
+}
+
+/* RIGHT-CONTAINER */
+.header-wrapper .right-container {
+    width: 100%;
+    height: 80px;
+
+    padding: 0px 2.5%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header-wrapper .right-container .games-area .game-btn {
+    appearance: none;
+    outline: none;
+    border: none;
+
+    cursor: pointer;
+
+    margin: 0px 10px;
+
+    font-weight: bold;
+    font-size: 14px;
+
+    color: var(--yellow-00);
+    background-color: transparent;
+}
+.header-wrapper .right-container .user-area .login-btn {
+    appearance: none;
+    outline: none;
+    border: none;
+
+    cursor: pointer;
+
+    margin: 0px 10px;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    color: var(--grey-00);
+
+    background-color: transparent;
+
+    transition: color .3s;
+}
+.header-wrapper .right-container .user-area .login-btn:hover {
+    transition: color .3s;
+    color: var(--yellow-00);
+}
+.header-wrapper .right-container .user-area .register-btn {
+    appearance: none;
+    outline: none;
+    border: none;
+
+    cursor: pointer;
+
+    margin: 0px 10px;
+    padding: 5px 10px;
+
+    color: white;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    background-color: var(--yellow-00);
+}
+
+
+
+/* CELLPHONE MENU */
+.cellphone-menu {
+    display: none;
+}
+
+@media only screen and (max-width: 800px) {
+
+    /* REMOVE RIGHT CONTAINER */
+    .header-wrapper .right-container {
+        display: none;
+    }
+
+    /* INSERT CELLPHONE MENU */
+    .cellphone-menu {
+        display: flex;
+    }
+}

@@ -1,0 +1,26 @@
+* {
+  margin: 0;
+  padding: 0;
+
+  box-sizing: border-box;
+
+  font-family: 'Mada', sans-serif;
+}
+
+:root {
+  --black-00: #24252f;
+  --black-01: #181a20;
+  --black-02: #1a1c24;
+
+  --grey-00: #8e8fa2;
+
+  --yellow-00: #e9b10e;
+  --yellow-01: #cc6c31;
+
+  --green-00: #02bf4d;
+}
+
+body {
+
+  background-color: var(--black-02);
+}
