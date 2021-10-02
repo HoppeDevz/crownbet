@@ -15,6 +15,7 @@ class App {
 
         /* START */
         this.useCors();
+        this.useContentTypeJSON();
         this.useRoutes();
     }
 
@@ -26,6 +27,11 @@ class App {
             callback(new Error("(PORT) PARAM IS OUTSIDE OF THE PORT RANGE 1024~49151"))
         : 
             callback(null);
+    }
+
+    private useContentTypeJSON() {
+
+        this.app.use(express.json());
     }
 
     private useRoutes() {

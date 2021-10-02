@@ -5,11 +5,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = __importDefault(require("express"));
 var router_1 = __importDefault(require("./router"));
+var cors_1 = __importDefault(require("cors"));
 var App = /** @class */ (function () {
     function App() {
         this.app = (0, express_1.default)();
         this.router = router_1.default;
         /* START */
+        this.useCors();
+        this.useContentTypeJSON();
         this.useRoutes();
     }
     App.prototype.checkPortRange = function (PORT, callback) {
@@ -19,8 +22,16 @@ var App = /** @class */ (function () {
             :
                 callback(null);
     };
+    App.prototype.useContentTypeJSON = function () {
+        this.app.use(express_1.default.json());
+    };
     App.prototype.useRoutes = function () {
         this.app.use(this.router);
+    };
+    App.prototype.useCors = function () {
+        this.app.use((0, cors_1.default)({
+            origin: "*"
+        }));
     };
     App.prototype.startServer = function (PORT) {
         var _this = this;
