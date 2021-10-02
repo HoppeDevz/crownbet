@@ -1,4 +1,5 @@
 import Param from '../types/Param';
+import moment from 'moment';
 
 class ParamsController {
     
@@ -12,6 +13,7 @@ class ParamsController {
 
                     return new Error(`Param '${paramName}' must have at least ${value} characters`);
                 }
+                break;
             
             case "strPattern":
                 switch(value) {
@@ -23,7 +25,18 @@ class ParamsController {
 
                             return new Error(`Param '${paramName}' is invalid e-mail!`);
                         }
+                        break;
+                    
+                    case "date":
+                        const isValidDate = moment(param).isValid();
+
+                        if (!isValidDate) {
+
+                            return new Error(`Param '${paramName}' is invalid DateString!`);
+                        }
+                        break;
                 }
+                break;
         }
     }
 

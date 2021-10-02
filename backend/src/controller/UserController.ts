@@ -12,16 +12,20 @@ class UserController {
         const username = req.body.username || "";
         const email = req.body.email || "";
         const password = req.body.password || "";
+        const birthDate = req.body.birthDate || "";
 
         ParamsController.requireParamsType([
             { paramName: "username", param: username, paramType: "string", rules: [
-                ["minStrLen", 10]
+                ["minStrLen", 6]
             ]},
             { paramName: "email", param: email, paramType: "string", rules: [
                 ["strPattern", "email"]
             ]},
             { paramName: "password", param: password, paramType: "string", rules: [
-                ["minStrLen", 10]
+                ["minStrLen", 8]
+            ]},
+            { paramName: "birthDate", param: birthDate, paramType: "string", rules: [
+                ["strPattern", "date"]
             ]},
         ],
         err => {
@@ -47,6 +51,8 @@ class UserController {
                     res.status(400).send({
                         message: "Username already in use!"
                     });
+
+                    return connection.close();
                 }
 
                 if (alreadyEmail) {
@@ -54,6 +60,8 @@ class UserController {
                     res.status(400).send({
                         message: "Email already in use!"
                     });
+
+                    return connection.close();
                 }
 
                 const user = new User();
@@ -67,6 +75,8 @@ class UserController {
                 await connection.manager.save(user);
 
                 res.status(200).send({ message: "User created!" });
+
+                return connection.close();
             })
         });
     }

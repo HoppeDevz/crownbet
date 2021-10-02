@@ -51,15 +51,19 @@ var UserController = /** @class */ (function () {
         var username = req.body.username || "";
         var email = req.body.email || "";
         var password = req.body.password || "";
+        var birthDate = req.body.birthDate || "";
         ParamsController_1.default.requireParamsType([
             { paramName: "username", param: username, paramType: "string", rules: [
-                    ["minStrLen", 10]
+                    ["minStrLen", 6]
                 ] },
             { paramName: "email", param: email, paramType: "string", rules: [
                     ["strPattern", "email"]
                 ] },
             { paramName: "password", param: password, paramType: "string", rules: [
-                    ["minStrLen", 10]
+                    ["minStrLen", 8]
+                ] },
+            { paramName: "birthDate", param: birthDate, paramType: "string", rules: [
+                    ["strPattern", "date"]
                 ] },
         ], function (err) {
             if (err)
@@ -86,11 +90,13 @@ var UserController = /** @class */ (function () {
                                 res.status(400).send({
                                     message: "Username already in use!"
                                 });
+                                return [2 /*return*/, connection.close()];
                             }
                             if (alreadyEmail) {
                                 res.status(400).send({
                                     message: "Email already in use!"
                                 });
+                                return [2 /*return*/, connection.close()];
                             }
                             user = new User_1.default();
                             user.username = username;
@@ -102,7 +108,7 @@ var UserController = /** @class */ (function () {
                         case 3:
                             _a.sent();
                             res.status(200).send({ message: "User created!" });
-                            return [2 /*return*/];
+                            return [2 /*return*/, connection.close()];
                     }
                 });
             }); });

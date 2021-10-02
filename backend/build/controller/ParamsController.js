@@ -1,5 +1,9 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+var moment_1 = __importDefault(require("moment"));
 var ParamsController = /** @class */ (function () {
     function ParamsController() {
     }
@@ -9,6 +13,7 @@ var ParamsController = /** @class */ (function () {
                 if (param.length < value) {
                     return new Error("Param '" + paramName + "' must have at least " + value + " characters");
                 }
+                break;
             case "strPattern":
                 switch (value) {
                     case "email":
@@ -17,7 +22,15 @@ var ParamsController = /** @class */ (function () {
                         if (!isEmail) {
                             return new Error("Param '" + paramName + "' is invalid e-mail!");
                         }
+                        break;
+                    case "date":
+                        var isValidDate = (0, moment_1.default)(param).isValid();
+                        if (!isValidDate) {
+                            return new Error("Param '" + paramName + "' is invalid DateString!");
+                        }
+                        break;
                 }
+                break;
         }
     };
     ParamsController.prototype.requireParams = function (params, callback) {

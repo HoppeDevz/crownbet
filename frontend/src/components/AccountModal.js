@@ -59,12 +59,39 @@ function AccountModal(props) {
 
     function RegisterHandler() {
 
-        console.log({
+        if (!VerifyParam("username", username)) return alert("Usuário inválido!");
+        if (!VerifyParam("email", email)) return alert("E-mail inválido!");
+        if (!VerifyParam("password", password)) return alert("Senha inválida!");
+        if (!VerifyParam("birthDate", birthDate)) return alert("Você deve ser maior de 18 anos!");
+
+        
+        api.post("/register_account", {
             username,
             email,
             password,
             birthDate
         })
+        .then(sucess => {
+
+            alert("Conta criada com sucesso!");
+            setModalState(0);
+        })
+        .catch(err => {
+            
+            const message = (err.response.data.message);
+
+            if (message == "Username already in use!") {
+
+                return alert("Nome de usuário já está em uso!");
+            }
+
+            if (message == "Email already in use!") {
+
+                return alert("Este e-mail já está em uso!");
+            }
+
+            alert("Algo deu errado, tente novamente mais tarde...");
+        });
     }
 
     function VerifyParam(paramType, param) {
@@ -88,6 +115,15 @@ function AccountModal(props) {
         if (paramType == "username") {
 
             return param.length >= MIN_USERNAME_LENGTH || param == "";
+        }
+
+        if (paramType == "birthDate") {
+
+            const date = new Date(param).getTime();
+            const currentDate = new Date().getTime();
+            const years = new Date(currentDate - date).getFullYear() - 1970;
+
+            return years >= 18;
         }
     }
     
