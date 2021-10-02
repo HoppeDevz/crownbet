@@ -129,6 +129,10 @@
     background-color: var(--black-01);
     border-radius: 6px;
 }
+.account-modal-wrapper .modal .form-input.error {
+    transition: border .3s;
+    border: 1px solid crimson;
+}
 .account-modal-wrapper .modal .modal-form .form-input .placeholder {
     cursor: none;
     pointer-events: none;
@@ -140,6 +144,13 @@
     transform: translateY(15px);
 
     transition: transform .3s;
+}
+.account-modal-wrapper .modal .modal-form .form-input .err-info {
+    cursor: pointer;
+    position: absolute;
+
+    right: 8px;
+    top: 8px;
 }
 .account-modal-wrapper .modal .modal-form .form-input .focus {
     transform: translateX(-5px);
@@ -161,6 +172,7 @@
     background-color: transparent;
 }
 .account-modal-wrapper .modal .modal-form .form-input .text-area::-ms-reveal {
+    display: none;
     filter: invert(100%);
 }
 .account-modal-wrapper .modal .modal-form .form-input .text-area::-webkit-calendar-picker-indicator {

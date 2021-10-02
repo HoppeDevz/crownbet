@@ -1,0 +1,14 @@
+.mouse-hover-modal-wrapper {
+    position: absolute;
+
+    padding: 10px 5px;
+
+    z-index: 1001;
+
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.7);
+    
+    background-color: var(--black-01);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
