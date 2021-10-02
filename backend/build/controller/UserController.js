@@ -40,14 +40,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var typeorm_1 = require("typeorm");
+var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 var ParamsController_1 = __importDefault(require("./ParamsController"));
 var User_1 = __importDefault(require("../entity/User"));
+var config_1 = __importDefault(require("../config"));
 var UserController = /** @class */ (function () {
     function UserController() {
     }
     UserController.prototype.registerUser = function (req, res) {
         var _this = this;
-        console.log(req.body);
         var username = req.body.username || "";
         var email = req.body.email || "";
         var password = req.body.password || "";
@@ -113,6 +114,32 @@ var UserController = /** @class */ (function () {
                 });
             }); });
         });
+    };
+    UserController.prototype.userLogin = function (req, res) {
+        var _this = this;
+        var email = req.headers['x-email'] || "";
+        var password = req.headers['x-password'] || "";
+        (0, typeorm_1.createConnection)().then(function (connection) { return __awaiter(_this, void 0, void 0, function () {
+            var user, isCorrectPassword, token;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, connection
+                            .getRepository(User_1.default)
+                            .createQueryBuilder()
+                            .where("email = :email", { email: email })
+                            .getOne()];
+                    case 1:
+                        user = _a.sent();
+                        if (!user)
+                            return [2 /*return*/, res.status(404).send({ message: "User not found!" }) && connection.close()];
+                        isCorrectPassword = user.password == password;
+                        if (!isCorrectPassword)
+                            return [2 /*return*/, res.status(404).send({ message: "User not found!" }) && connection.close()];
+                        token = jsonwebtoken_1.default.sign({ id: user.id }, config_1.default.JWT_SECRET, { expiresIn: "1h" });
+                        return [2 /*return*/, res.status(200).send({ token: token }) && connection.close()];
+                }
+            });
+        }); });
     };
     return UserController;
 }());

@@ -54,7 +54,20 @@ function AccountModal(props) {
 
     function LoginHandler() {
 
-        console.log({ userEmail, userPassword });
+        api.get("/user_login", {
+            headers: {
+                "x-email": userEmail,
+                "x-password": userPassword
+            }
+        })
+        .then(response => {
+
+            console.log(response.data);
+        })
+        .catch(err => {
+
+            alert("Login e/ou senha inválido(s)!");
+        })
     }
 
     function RegisterHandler() {
@@ -139,6 +152,8 @@ function AccountModal(props) {
                         <button className={modalState == 0 ? "btn selected" : "btn"} onClick={() => setModalState(0)}>Entrar</button>
 
                         <button className={modalState == 1 ? "btn selected" : "btn"} onClick={() => setModalState(1)}>Cadastre-se</button>
+
+                        <Icons.xCircleIcon onClick={props.onCloseModalHandle} className="close-modal-btn" size={16} color="rgba(255, 255, 255, 0.5)" />
                     </div>
 
                     {modalState == 0 ?

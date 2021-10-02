@@ -1,13 +1,13 @@
 import { Request, Response } from 'express';
 import { createConnection } from 'typeorm';
+import jwt from 'jsonwebtoken';
 import ParamsController from './ParamsController';
 import User from '../entity/User';
+import config from '../config';
 
 class UserController {
 
     public registerUser(req: Request, res: Response): void {
-
-        console.log(req.body);
 
         const username = req.body.username || "";
         const email = req.body.email || "";
@@ -78,6 +78,31 @@ class UserController {
 
                 return connection.close();
             })
+        });
+    }
+
+    public userLogin(req: Request, res: Response) {
+
+        const email = req.headers['x-email'] || "";
+        const password = req.headers['x-password'] || "";
+
+        createConnection().then(async connection => {
+
+            const user = await connection
+            .getRepository(User)
+            .createQueryBuilder()
+            .where("email = :email", { email })
+            .getOne();
+
+            if (!user) return res.status(404).send({ message: "User not found!" }) && connection.close();
+
+            const isCorrectPassword = user.password == password;
+
+            if (!isCorrectPassword) return res.status(404).send({ message: "User not found!" }) && connection.close();
+
+            const token = jwt.sign({ id: user.id }, config.JWT_SECRET, { expiresIn: "1h" });
+
+            return res.status(200).send({ token }) && connection.close();
         });
     }
 }

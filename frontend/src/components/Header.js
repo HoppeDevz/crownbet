@@ -24,7 +24,7 @@ function Header() {
         <>
             {
             showAccountModal ?
-                <AccountModal />
+                <AccountModal onCloseModalHandle={() => setShowAccountModal(false)} />
             : null
             }
 
