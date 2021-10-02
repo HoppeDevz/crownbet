@@ -16,6 +16,9 @@ class User {
     email: string;
 
     @Column()
+    balance: number;
+
+    @Column()
     created_at: Date;
 
     @Column()

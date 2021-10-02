@@ -43,16 +43,24 @@ var CreateUsersTable1633140473029 = /** @class */ (function () {
     CreateUsersTable1633140473029.prototype.up = function (queryRunner) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                queryRunner.query("\n            CREATE TABLE IF NOT EXISTS users_accounts (\n            id int(11) NOT NULL AUTO_INCREMENT,\n            username varchar(255) NOT NULL,\n            email varchar(255) NOT NULL,\n            password varchar(2056) NOT NULL,\n            created_at DATE NOT NULL,\n            updated_at DATE NOT NULL,\n            PRIMARY KEY (id)\n            )\n        ");
-                return [2 /*return*/];
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, queryRunner.query("\n            CREATE TABLE IF NOT EXISTS users_accounts (\n            id int(11) NOT NULL AUTO_INCREMENT,\n            username varchar(255) NOT NULL,\n            email varchar(255) NOT NULL,\n            password varchar(2056) NOT NULL,\n            balance float(11) NOT NULL,\n            created_at DATE NOT NULL,\n            updated_at DATE NOT NULL,\n            PRIMARY KEY (id)\n            )\n        ")];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
             });
         });
     };
     CreateUsersTable1633140473029.prototype.down = function (queryRunner) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                queryRunner.query("DROP TABLE users_accounts");
-                return [2 /*return*/];
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, queryRunner.query("DROP TABLE users_accounts")];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
             });
         });
     };

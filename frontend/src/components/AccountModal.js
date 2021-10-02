@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 * @Lib
 */
 import api from '../lib/api';
-import Icons from '../lib/icons';
+import { Info, XCircle } from 'react-feather';
 
 /**
 * @Components
@@ -62,7 +62,11 @@ function AccountModal(props) {
         })
         .then(response => {
 
-            console.log(response.data);
+            if (response.data.token) {
+
+                localStorage.setItem("x-user-token", response.data.token);
+                props.onLoginHandler(response.data.token);
+            }
         })
         .catch(err => {
 
@@ -153,7 +157,7 @@ function AccountModal(props) {
 
                         <button className={modalState == 1 ? "btn selected" : "btn"} onClick={() => setModalState(1)}>Cadastre-se</button>
 
-                        <Icons.xCircleIcon onClick={props.onCloseModalHandle} className="close-modal-btn" size={16} color="rgba(255, 255, 255, 0.5)" />
+                        <XCircle onClick={props.onCloseModalHandle} className="close-modal-btn" size={16} color="rgba(255, 255, 255, 0.5)" />
                     </div>
 
                     {modalState == 0 ?
@@ -192,7 +196,7 @@ function AccountModal(props) {
 
                                     <div className={VerifyParam("username", username) ? "form-input": "form-input error"}>
                                         {!VerifyParam("username", username) ?
-                                            <Icons.InfoIcon
+                                            <Info
                                                 onMouseEnter={() => EnableMouseHoverModal("O nome de usuário deve ter pelo menos 6 caracteres!")}
                                                 onMouseLeave={DisableMouseHoverModal}
 
@@ -207,7 +211,7 @@ function AccountModal(props) {
                                     
                                     <div className={VerifyParam("email", email) ? "form-input": "form-input error"}>
                                         {!VerifyParam("email", email) ?
-                                            <Icons.InfoIcon 
+                                            <Info 
                                                 onMouseEnter={() => EnableMouseHoverModal("O endereço deve ser válido!")}
                                                 onMouseLeave={DisableMouseHoverModal}
                                                 
@@ -222,7 +226,7 @@ function AccountModal(props) {
 
                                     <div className={VerifyParam("password", password) ? "form-input": "form-input error"}>
                                         {!VerifyParam("password", password) ?
-                                            <Icons.InfoIcon 
+                                            <Info
                                                 onMouseEnter={() => EnableMouseHoverModal("A senha deve ter pelo menos 8 caracteres!")}
                                                 onMouseLeave={DisableMouseHoverModal}
 

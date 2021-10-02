@@ -1,9 +1,10 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { createConnection } from 'typeorm';
 import jwt from 'jsonwebtoken';
 import ParamsController from './ParamsController';
 import User from '../entity/User';
 import config from '../config';
+import Balance from '../entity/Balance';
 
 class UserController {
 
@@ -69,6 +70,7 @@ class UserController {
                 user.username = username;
                 user.email = email;
                 user.password = password;
+                user.balance = 0.0;
                 user.created_at = new Date();
                 user.updated_at = new Date();
 
@@ -103,6 +105,43 @@ class UserController {
             const token = jwt.sign({ id: user.id }, config.JWT_SECRET, { expiresIn: "1h" });
 
             return res.status(200).send({ token }) && connection.close();
+        });
+    }
+
+    public userTokenMiddleWare(req: Request, res: Response, next: NextFunction) {
+
+        try {
+
+            const token = req.headers["authorization"].split(" ")[1];
+
+            req.body.decoded = jwt.verify(token, config.JWT_SECRET);
+
+            next();
+
+        } catch(err) {
+
+            return res.status(500).send({ message: "Internal Error" });
+        }
+    }
+
+    public getUserBalance(req: Request, res: Response) {
+
+        const { id: user_id } = req.body.decoded;
+
+        console.log({ user_id });
+
+        createConnection().then(async connection => {
+
+            const user = await connection
+            .getRepository(User)
+            .createQueryBuilder()
+            .where("id = :user_id", { user_id })
+            .getOne();
+
+            if (user) return res.status(200).send({ balance: user.balance }) && connection.close();
+            
+            return res.status(404).send({ message: "User not found!" }) && connection.close();
+            
         });
     }
 }

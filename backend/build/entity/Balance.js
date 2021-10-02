@@ -10,41 +10,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var typeorm_1 = require("typeorm");
-var User = /** @class */ (function () {
-    function User() {
+var Balance = /** @class */ (function () {
+    function Balance() {
     }
     __decorate([
         (0, typeorm_1.PrimaryColumn)(),
         __metadata("design:type", Number)
-    ], User.prototype, "id", void 0);
-    __decorate([
-        (0, typeorm_1.Column)(),
-        __metadata("design:type", String)
-    ], User.prototype, "username", void 0);
-    __decorate([
-        (0, typeorm_1.Column)(),
-        __metadata("design:type", String)
-    ], User.prototype, "password", void 0);
-    __decorate([
-        (0, typeorm_1.Column)(),
-        __metadata("design:type", String)
-    ], User.prototype, "email", void 0);
+    ], Balance.prototype, "user_id", void 0);
     __decorate([
         (0, typeorm_1.Column)(),
         __metadata("design:type", Number)
-    ], User.prototype, "balance", void 0);
-    __decorate([
-        (0, typeorm_1.Column)(),
-        __metadata("design:type", Date)
-    ], User.prototype, "created_at", void 0);
-    __decorate([
-        (0, typeorm_1.Column)(),
-        __metadata("design:type", Date)
-    ], User.prototype, "updated_at", void 0);
-    User = __decorate([
-        (0, typeorm_1.Entity)('users_accounts')
-    ], User);
-    return User;
+    ], Balance.prototype, "balance", void 0);
+    Balance = __decorate([
+        (0, typeorm_1.Entity)("users_balance")
+    ], Balance);
+    return Balance;
 }());
-exports.default = User;
-//# sourceMappingURL=User.js.map
+exports.default = Balance;
+//# sourceMappingURL=Balance.js.map

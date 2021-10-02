@@ -11,6 +11,8 @@
     height: 80px;
 
     background-color: var(--black-00);
+
+    z-index: 999;
 }
 
 /* LEFT-CONTAINER */
@@ -25,6 +27,7 @@
     border-right: 1px solid rgba(255, 255, 255, 0.1);
 }
 .header-wrapper .left-container h1 {
+    font-size: 25px;
     color: white;
 }
 .header-wrapper .left-container h1 span {
@@ -99,20 +102,136 @@
 
 
 
+
+
+/* LOGGED AREA */
+.header-wrapper .right-container .logged-user-area {
+    display: flex;
+    flex-direction: row;
+
+    justify-self: flex-start;
+    align-items: center;
+}
+
+
+.header-wrapper .right-container .logged-user-area .balance {
+    display: flex;
+    flex-direction: column;
+
+    justify-self: flex-start;
+    align-items: flex-start;
+
+    margin: 0px 50px 0px 0px;
+}
+.header-wrapper .right-container .logged-user-area .balance .balance-label {
+    font-size: 12px;
+    color: var(--yellow-00);
+}
+.header-wrapper .right-container .logged-user-area .balance .balance-value {
+    color: white;
+
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+.header-wrapper .right-container .logged-user-area .balance-actions {
+    display: flex;
+    flex-direction: row;
+
+    justify-self: flex-start;
+    align-items: center;
+
+    margin: 0px 50px 0px 0px;
+}
+.header-wrapper .right-container .logged-user-area .balance-actions .withdraw {
+    width: 130px;
+
+    cursor: pointer;
+
+    appearance: none;
+    border: none;
+    outline: none;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    color: white;
+    background-color: transparent;
+
+    border: 1px solid var(--yellow-00);
+
+    padding: 10px 20px;
+    margin: 0px 10px;
+}
+.header-wrapper .right-container .logged-user-area .balance-actions .deposit {
+    width: 130px;
+
+    cursor: pointer;
+
+    appearance: none;
+    border: none;
+    outline: none;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    color: white;
+    background-color: var(--yellow-00);
+
+    padding: 10px 20px;
+    margin: 0px 10px;
+}
+
+.header-wrapper .right-container .logged-user-area .logout-btn {
+    cursor: pointer;
+}
+/* LOGGED AREA */
+
+
+
 /* CELLPHONE MENU */
-.cellphone-menu {
+.cellphone-menu-btn {
     display: none;
 }
 
 @media only screen and (max-width: 800px) {
+
+    .header-wrapper {
+        justify-content: space-between;
+    }
 
     /* REMOVE RIGHT CONTAINER */
     .header-wrapper .right-container {
         display: none;
     }
 
-    /* INSERT CELLPHONE MENU */
-    .cellphone-menu {
+    /* LEFT-CONTAINER */
+    .header-wrapper .left-container {
+        width: 150px;
+        height: 80px;
+
         display: flex;
+        justify-content: center;
+        align-items: center;
+
+        border-right: none;
+    }
+    .header-wrapper .left-container h1 {
+        font-size: 20px;
+        color: white;
+    }
+
+    /* INSERT CELLPHONE MENU */
+    .cellphone-menu-btn {
+        cursor: pointer;
+
+        display: flex;
+        height: 100%;
+
+        justify-content: center;
+        align-items: center;
+
+        margin: 0px 10px;
     }
 }

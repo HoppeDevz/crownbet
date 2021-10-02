@@ -1,0 +1,42 @@
+.loading-screen-wrapper {
+    position: absolute;
+
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    
+    justify-content: center;
+    align-items: center;
+
+    background-color: var(--black-01);
+
+    z-index: 5000;
+}
+.loading-screen-wrapper .center {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+}
+.loading-screen-wrapper .center h1 {
+    color: white;
+}
+.loading-screen-wrapper .center span {
+    color: var(--yellow-00);
+}
+
+.loading-screen-wrapper.hidden {
+    cursor: none;
+    pointer-events: none;
+
+    opacity: 0%;
+
+    animation: fadeOut .5s;
+}
+
+@keyframes fadeOut {
+    from { opacity: 100%; }
+    to { opacity: 0%; }
+}

@@ -11,4 +11,29 @@
     background-color: var(--black-01);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 4px;
+
+    animation: bottomToUp-fadeIn .4s;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+@keyframes bottomToUp-fadeIn {
+    from {
+        opacity: 0%;
+        transform: translateX(-20px);
+    }
+
+    to {
+        opacity: 100%;
+        transform: translateX(0px);
+    }
 }

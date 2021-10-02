@@ -103,6 +103,7 @@ var UserController = /** @class */ (function () {
                             user.username = username;
                             user.email = email;
                             user.password = password;
+                            user.balance = 0.0;
                             user.created_at = new Date();
                             user.updated_at = new Date();
                             return [4 /*yield*/, connection.manager.save(user)];
@@ -137,6 +138,38 @@ var UserController = /** @class */ (function () {
                             return [2 /*return*/, res.status(404).send({ message: "User not found!" }) && connection.close()];
                         token = jsonwebtoken_1.default.sign({ id: user.id }, config_1.default.JWT_SECRET, { expiresIn: "1h" });
                         return [2 /*return*/, res.status(200).send({ token: token }) && connection.close()];
+                }
+            });
+        }); });
+    };
+    UserController.prototype.userTokenMiddleWare = function (req, res, next) {
+        try {
+            var token = req.headers["authorization"].split(" ")[1];
+            req.body.decoded = jsonwebtoken_1.default.verify(token, config_1.default.JWT_SECRET);
+            next();
+        }
+        catch (err) {
+            return res.status(500).send({ message: "Internal Error" });
+        }
+    };
+    UserController.prototype.getUserBalance = function (req, res) {
+        var _this = this;
+        var user_id = req.body.decoded.id;
+        console.log({ user_id: user_id });
+        (0, typeorm_1.createConnection)().then(function (connection) { return __awaiter(_this, void 0, void 0, function () {
+            var user;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, connection
+                            .getRepository(User_1.default)
+                            .createQueryBuilder()
+                            .where("id = :user_id", { user_id: user_id })
+                            .getOne()];
+                    case 1:
+                        user = _a.sent();
+                        if (user)
+                            return [2 /*return*/, res.status(200).send({ balance: user.balance }) && connection.close()];
+                        return [2 /*return*/, res.status(404).send({ message: "User not found!" }) && connection.close()];
                 }
             });
         }); });

@@ -1,0 +1,197 @@
+.cellphone-menu-background {
+    position: absolute;
+
+    width: 100vw;
+    height: 100vh;
+
+    background-color: rgba(0, 0, 0, 0.4);
+
+    animation: fadeIn .2s;
+}
+
+.cellphone-menu {
+    position: absolute;
+
+    width: 100vw;
+
+    top: 0px;
+    right: 0px;
+
+    background-color: var(--black-02);
+    z-index: 998;
+}
+.cellphone-menu::before {
+    content: '?';
+    display: block;
+    width: 100%;
+    height: 80px;
+}
+
+/* USER AREA */
+.cellphone-menu .user-balance {
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-between;
+    align-items: center;
+
+    font-weight: bold;
+    font-size: 30px;
+
+    color: white;
+
+    padding: 25px 50px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.cellphone-menu .user-area {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 30px 30px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.cellphone-menu .user-area .login-btn {
+    width: 120px;
+
+    appearance: none;
+    border: none;
+    outline: none;
+
+    font-size: 13px;
+    font-weight: bold;
+
+    padding: 10px 20px;
+    margin: 0px 5px;
+
+    color: white;
+    background-color: var(--yellow-00);
+}
+.cellphone-menu .user-area .register-btn {
+    width: 120px;
+
+    appearance: none;
+    border: none;
+    outline: none;
+    background-color: transparent;
+
+    font-size: 13px;
+    font-weight: bold;
+
+    padding: 9px 19px;
+    margin: 0px 5px;
+
+    color: white;
+    border: 1px solid var(--yellow-00);
+}
+/* USER AREA */
+
+
+
+
+
+
+
+/* GAMES AREA */
+.cellphone-menu .games-area {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+}
+.cellphone-menu .games-area .game-btn {
+    appearance: none;
+    border: none;
+    outline: none;
+    
+    width: 100%;
+
+    padding: 20px 0px;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    color: var(--yellow-00);
+    background-color: transparent;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+/* GAMES AREA */
+
+
+
+
+
+
+
+
+/* BALANCE CONTROLS AREA */
+.cellphone-menu .balance-controls {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px 0px;
+}
+.cellphone-menu .balance-controls .deposit {
+    width: 550px;
+
+    appearance: none;
+    border: none;
+    outline: none;
+    background-color: transparent;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    padding: 10px 5px;
+    margin: 10px 0px;
+
+    color: white;
+    background-color: var(--yellow-00);
+}
+.cellphone-menu .balance-controls .withdraw {
+    width: 550px;
+
+    appearance: none;
+    border: none;
+    outline: none;
+    background-color: transparent;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    padding: 9px 4px;
+    margin: 10px 0px;
+
+    color: white;
+    border: 1px solid var(--yellow-00);
+}
+/* BALANCE CONTROLS AREA */
+
+
+@keyframes cell-menu-slide {
+    from {
+        transform: translateX(200px);
+    }
+
+    to {
+        transform: translateX(0px);
+    }
+}
+@media only screen and (min-width: 800px) {
+    
+    .cellphone-menu {
+        display: none;
+    }
+
+    .cellphone-menu-background {
+        display: none;
+    }
+}
