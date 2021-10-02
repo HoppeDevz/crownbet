@@ -15,8 +15,7 @@ var Database = /** @class */ (function () {
             database: config_1.default.DB_NAME
         });
     }
-    Database.prototype.syncSQL = function () {
-    };
     return Database;
 }());
+exports.default = new Database();
 //# sourceMappingURL=index.js.map

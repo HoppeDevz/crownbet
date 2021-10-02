@@ -1,0 +1,23 @@
+{
+    "type": "mysql",
+    "host": "localhost",
+    "port": 3306,
+    "username": "root",
+    "password": "",
+    "database": "crownbet",
+    "synchronize": false,
+    "entities": [
+       "build/entity/*.js"
+    ],
+    "migrations": [
+       "build/database/migrations/*.js"
+    ],
+    "subscribers": [
+       "build/subscriber/*.js"
+    ],
+    "cli": {
+       "entitiesDir": "build/entity",
+       "migrationsDir": "build/database/migrations",
+       "subscribersDir": "build/subscriber"
+    }
+ }

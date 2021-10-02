@@ -9,13 +9,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.User = void 0;
 var typeorm_1 = require("typeorm");
 var User = /** @class */ (function () {
     function User() {
     }
     __decorate([
-        (0, typeorm_1.PrimaryGeneratedColumn)(),
+        (0, typeorm_1.PrimaryColumn)(),
         __metadata("design:type", Number)
     ], User.prototype, "id", void 0);
     __decorate([
@@ -25,11 +24,11 @@ var User = /** @class */ (function () {
     __decorate([
         (0, typeorm_1.Column)(),
         __metadata("design:type", String)
-    ], User.prototype, "email", void 0);
+    ], User.prototype, "password", void 0);
     __decorate([
         (0, typeorm_1.Column)(),
         __metadata("design:type", String)
-    ], User.prototype, "password", void 0);
+    ], User.prototype, "email", void 0);
     __decorate([
         (0, typeorm_1.Column)(),
         __metadata("design:type", Date)
@@ -39,9 +38,9 @@ var User = /** @class */ (function () {
         __metadata("design:type", Date)
     ], User.prototype, "updated_at", void 0);
     User = __decorate([
-        (0, typeorm_1.Entity)()
+        (0, typeorm_1.Entity)('users_accounts')
     ], User);
     return User;
 }());
-exports.User = User;
+exports.default = User;
 //# sourceMappingURL=User.js.map

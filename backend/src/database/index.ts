@@ -16,9 +16,6 @@ class Database {
             database: config.DB_NAME
         });
     }
-
-    public syncSQL() {
-
-        
-    }
 }
+
+export default new Database();
