@@ -31,9 +31,9 @@ function CellphoneMenu(props) {
                 }
 
                 <div className="games-area">
-                    <button className="game-btn">ROLETA</button>
-                    <button className="game-btn">COINFLIP</button>
-                    <button className="game-btn">CRASH</button>
+                    <button onClick={() => props.onChangeGame(0)} className={props.gameSelected == 0 ? "game-btn selected" : "game-btn"}>CRASH</button>
+                    <button onClick={() => props.onChangeGame(1)} className={props.gameSelected == 1 ? "game-btn selected" : "game-btn"}>ROLETA</button>
+                    <button onClick={() => props.onChangeGame(2)} className={props.gameSelected == 2 ? "game-btn selected" : "game-btn"}>COINFLIP</button>
                 </div>
 
                 {props.logged ? 

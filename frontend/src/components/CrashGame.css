@@ -1,0 +1,398 @@
+.crash-game-wrapper {
+    width: 100vw;
+
+    display: flex;  
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+}
+.crash-game-wrapper::before {
+    content: '?';
+    display: block;
+    width: 100vw;
+    height: 80px;
+}
+
+
+.crash-game-container {
+    width: 1000px;
+    height: 600px;
+
+    display: flex;
+    flex-direction: row;
+
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    background-color: var(--black-01);
+    border-radius: 4px;
+
+    margin: 50px 0px;
+}
+.crash-game-container .left-container {
+    position: relative;
+
+    width: 300px;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: flex-start;
+    align-items: center;
+
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/** BET LIST **/
+.crash-game-container .left-container .bet-list-wrapper {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    position: absolute;
+    bottom: 0px;
+}
+.crash-game-container .left-container .bet-list-wrapper .header {
+    width: 300px;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: flex-start;
+    align-items: center;
+
+    padding: 20px 0px;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+.crash-game-container .left-container .bet-list-wrapper .total-players {
+
+    font-size: 13px;
+    font-weight: bold;
+
+    color: white;
+}
+.crash-game-container .left-container .bet-list-wrapper .total-money {
+
+    font-size: 35px;
+    font-weight: bold;
+
+    color: seagreen;
+}
+
+
+
+/** CRASH GAME INPUT **/
+.crash-game-input {
+    position: relative;
+
+    width: 150px;
+    margin: 5px 0px;
+    padding: 0px 10px;
+
+    background-color: var(--black-00);
+    border-radius: 6px;
+}
+.crash-game-input.max-width {
+    width: 262px !important;
+}
+.crash-game-input .placeholder {
+    cursor: none;
+    pointer-events: none;
+
+    position: absolute;
+    color: white;
+
+    transform: translateX(10px);
+    transform: translateY(15px);
+
+    transition: transform .3s;
+}
+.crash-game-input .placeholder.focus {
+    transform: translateX(-5px);
+    transform: translateY(5px);
+
+    font-size: 12px;
+
+    transition: transform .3s;
+}
+.crash-game-input .text-area {
+    appearance: none;
+    border: none;
+    outline: none;
+
+    width: 100%;
+    padding: 20px 0px 10px 0px;
+
+    color: white;
+    background-color: transparent;
+}
+/** CRASH GAME INPUT **/
+
+
+
+/** BET CONTROLS **/
+.crash-game-container .left-container .bet-controls {
+    display: flex;
+    flex-direction: row;
+
+    justify-content: flex-start;
+    align-items: center;
+
+    margin: 20px 0px;
+}
+.crash-game-container .left-container .bet-controls .division {
+    cursor: pointer;
+
+    appearance: none;
+    border: none;
+    outline: none;
+    background-color: transparent;
+
+    font-size: 20px;
+    font-weight: 500;
+
+    color: var(--grey-00);
+
+    padding: 9px 15px;
+    margin: 0px 5px;
+
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+}
+.crash-game-container .left-container .bet-controls .multiply {
+    cursor: pointer;
+
+    appearance: none;
+    border: none;
+    outline: none;
+    background-color: transparent;
+
+    font-size: 16px;
+    font-weight: 500;
+
+    color: var(--grey-00);
+
+    padding: 11.5px 15px;
+    margin: 0px 5px;
+
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+}
+.crash-game-container .left-container .bet-btn {
+    width: 260px;
+    cursor: pointer;
+
+    appearance: none;
+    border: none;
+    outline: none;
+    background-color: transparent;
+
+    color: white;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    padding: 10px 20px;
+    margin: 20px 0px;
+
+    background-color: var(--yellow-00);
+}
+/** BET CONTROLS **/
+
+
+
+
+
+
+
+
+/** RIGHT CONTAINER **/
+.crash-game-container .right-container {
+    width: 70%;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.crash-game-container .right-container .crash-area {
+    width: 95%;
+    height: 450px;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    margin: 20px 0px;
+
+    background-color: var(--black-00);
+    border-radius: 4px;
+}
+.crash-game-container .right-container .crash-area .counter {
+    width: 200px;
+    height: 100px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.crash-game-container .right-container .crash-area .counter .counter-text {
+    color: white;
+
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.crash-game-container .right-container .crash-area .progress-bar-container {
+    width: 90%;
+    height: 30px;
+    
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+}
+.crash-game-container .right-container .crash-area .progress-bar-container .text {
+    position: absolute;
+
+    color: white;
+
+    z-index: 500;
+}
+.crash-game-container .right-container .crash-area .progress-bar {
+    width: 90%;
+    height: 30px;
+
+    appearance: none;
+
+    position: relative;
+    text-align: center;
+}
+.crash-game-container .right-container .crash-area .progress-bar::-webkit-progress-bar {
+    background-color: var(--black-01);
+
+    padding: 5px;
+    border-radius: 6px;
+}
+.crash-game-container .right-container .crash-area .progress-bar::-webkit-progress-value {
+    background-color: var(--yellow-00);
+    border-radius: 6px;
+}
+
+.crash-game-container .right-container .total-user-reward {
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+
+    justify-content: flex-start;
+    align-items: center;
+}
+.crash-game-container .right-container .total-user-reward .text {
+    margin-left: 20px;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    color: seagreen;
+}
+
+
+.crash-game-container .right-container .latest-results-wrapper {
+    max-width: 94%;
+
+    display: flex;
+    flex-direction: row;
+
+    justify-content: flex-end;
+    align-items: center;
+
+    margin: 20px 0px;
+
+    overflow: hidden;
+}
+.crash-game-container .right-container .latest-results-wrapper .result {
+
+    color: white;
+    background-color: var(--black-00);
+
+    margin: 0px 8px;
+    padding: 5px 10px;
+
+    border-radius: 4px;
+}
+.crash-game-container .right-container .latest-results-wrapper .result.profit {
+    background-color: seagreen;
+    border: 1px solid springgreen;
+}
+/** RIGHT CONTAINER **/
+
+
+
+
+
+@media only screen and (max-width: 1000px) {
+
+    .crash-game-container {
+        width: 100vw;
+        height: auto;
+    
+        display: flex;
+        flex-direction: column;
+    
+        justify-content: flex-start;
+        align-items: center;
+    
+        background-color: var(--black-01);
+        border-radius: 4px;
+    
+        margin: 50px 0px;
+    }
+    .crash-game-container .left-container {
+        width: 100%;
+        height: 100%;
+    
+        display: flex;
+        flex-direction: column;
+    
+        justify-content: flex-start;
+        align-items: center;
+    
+        border-right: none;
+    }
+
+    .crash-game-container .right-container {
+        width: 85%;
+    
+        display: flex;
+        flex-direction: column;
+    
+        justify-content: center;
+        align-items: center;
+    }
+    .crash-game-container .right-container .crash-area {
+        width: 100%;
+        height: 450px;
+    
+        display: flex;
+    
+        justify-content: center;
+        align-items: center;
+    
+        background-color: var(--black-00);
+        border-radius: 4px;
+    }
+    .crash-game-container .left-container .bet-list-wrapper {
+        display: none;
+    }
+}

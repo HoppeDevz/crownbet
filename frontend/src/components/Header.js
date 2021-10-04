@@ -16,6 +16,7 @@ import CONFIG from '../config/index';
  */
 import AccountModal from '../components/AccountModal';
 import CellphoneMenu from './CellphoneMenu';
+import DepositModal from './DepositModal';
 
 /**
  * 
@@ -24,13 +25,28 @@ import CellphoneMenu from './CellphoneMenu';
 import './Header.css';
 import api from '../lib/api';
 
+/**
+ * @Context
+ */
+import { GlobalContext } from '../providers/global';
+
 function Header(props) {
 
+    const { userBalance, setUserBalance } = React.useContext(GlobalContext);
+
+    const[showDepositModal, setShowDepositModal] = useState(false);
     const[showAccountModal, setShowAccountModal] = useState(false);
     const[showCellphoneMenu, setShowCellPhoneMenu] = useState(false);
 
     const[logged, setLogged] = useState(false);
-    const[userBalance, setUserBalance] = useState(0.0);
+
+    const[gameSelected, setGameSelected] = useState(props.gameSelected);
+
+    function onChangeGameHandler(gameId) {
+
+        setGameSelected(gameId);
+        props.onChangeGame(gameId);
+    }
 
     function onLogin(token) {
 
@@ -66,9 +82,12 @@ function Header(props) {
     // onUserEnter
     useEffect(() => {
 
-        const token = localStorage.getItem("x-user-token");
+        window.addEventListener("x-update-balance", data => {
 
-        console.log(token);
+            console.log(data);
+        })
+
+        const token = localStorage.getItem("x-user-token");
 
         if (!token) return props.onComponentLoaded();
 
@@ -93,12 +112,11 @@ function Header(props) {
             props.onComponentLoaded();
         })
 
-    }, [ setLogged, setUserBalance ])
+    }, [ setLogged ])
 
     return(
         <>
-            {
-            showAccountModal ?
+            {showAccountModal ?
                 <AccountModal onCloseModalHandle={() => setShowAccountModal(false)} onLoginHandler={onLogin} />
             : null
             }
@@ -110,7 +128,14 @@ function Header(props) {
                     onLogoutHandler={() => logoutHandler()}
                     logged={logged} 
                     userBalance={userBalance}
+
+                    gameSelected={gameSelected}
+                    onChangeGame={onChangeGameHandler}
                 />
+            :null}
+
+            {showDepositModal ? 
+                <DepositModal onCloseModal={() => setShowDepositModal(false)} />
             :null}
 
             <div className="header-wrapper">
@@ -125,10 +150,9 @@ function Header(props) {
                 <div className="right-container">
 
                     <div className="games-area">
-
-                        <button className="game-btn">ROLETA</button>
-                        <button className="game-btn">COINFLIP</button>
-                        <button className="game-btn">CRASH</button>
+                        <button onClick={() => onChangeGameHandler(0)} className={gameSelected == 0 ? "game-btn selected" : "game-btn"}>CRASH</button>
+                        <button onClick={() => onChangeGameHandler(1)} className={gameSelected == 1 ? "game-btn selected" : "game-btn"}>ROLETA</button>
+                        <button onClick={() => onChangeGameHandler(2)} className={gameSelected == 2 ? "game-btn selected" : "game-btn"}>COINFLIP</button>
                     </div>
 
                     {logged ?
@@ -140,7 +164,7 @@ function Header(props) {
                             </div>
 
                             <div className="balance-actions">
-                                <button className="deposit">DEPOSITAR</button>
+                                <button onClick={() => setShowDepositModal(true)} className="deposit">DEPOSITAR</button>
                                 <button className="withdraw">SACAR</button>
                             </div>
 

@@ -21,6 +21,31 @@
 }
 
 body {
-
   background-color: var(--black-02);
+
+  overflow-x: hidden;
 }
+
+
+
+
+/* KEYFRAMES */
+@keyframes fadeIn {
+  from { opacity: 0%; }
+  to { opacity: 100%; }
+}
+@keyframes scaleIn {
+  from { transform: scale(0.0); }
+  to { transform: scale(1.0); }
+}
+
+@keyframes slideFromRight {
+  from {
+    transform: translateX(200px);
+  }
+
+  to {
+    transform: translateX(0px);
+  }
+}
+/* KEYFRAMES */

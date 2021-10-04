@@ -57,8 +57,11 @@
     font-weight: bold;
     font-size: 14px;
 
-    color: var(--yellow-00);
+    color: var(--grey-00);
     background-color: transparent;
+}
+.header-wrapper .right-container .games-area .game-btn.selected {
+    color: var(--yellow-00);
 }
 .header-wrapper .right-container .user-area .login-btn {
     appearance: none;

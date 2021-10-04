@@ -29,8 +29,8 @@ function MouseHoverModal(props) {
     return(
         <div style={{
             display: props.activeModal ? "flex" : "none",
-            top: posY - 110,
-            left: posX
+            top: posY - 200,
+            left: posX - 60
 
 
         }} className="mouse-hover-modal-wrapper">

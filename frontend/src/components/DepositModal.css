@@ -1,0 +1,102 @@
+.deposit-modal-wrapper {
+    position: absolute;
+
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+
+    animation: fadeIn .3s;
+}
+.deposit-modal-wrapper .modal {
+    width: 400px;
+
+    background-color: var(--black-02);
+    border-radius: 4px;
+
+    animation: scaleIn .3s;
+}
+
+
+/* MODAL HEADER */
+.deposit-modal-wrapper .modal .header {
+    position: relative;
+    
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 50px 0px;
+}
+.deposit-modal-wrapper .modal .header .close-modal-btn {
+    position: absolute;
+
+    cursor: pointer;
+
+    top: 10px;
+    right: 10px
+}
+/* MODAL HEADER */
+
+
+
+
+
+/* DEPOSIT AMOUNT */
+.deposit-modal-wrapper .modal .deposit-amount {
+    width: 100%;
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 10px 0px;
+}
+.deposit-modal-wrapper .modal .deposit-amount .text-area {
+    width: 350px;
+    text-align: center;
+
+    appearance: none;
+    border: none;
+    outline: none;
+    background-color: transparent;
+
+    color: white;
+
+    font-size: 60px;
+}
+.deposit-modal-wrapper .modal .withdraw-btn-area {
+    width: 100%;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 50px 0px;
+}
+ .withdraw-btn {
+    width: 200px;
+
+    cursor: pointer;
+
+    appearance: none;
+    border: none;
+    outline: none;
+    background-color: transparent;
+
+    color: white;
+    background-color: var(--yellow-00);
+
+    padding: 10px 5px;
+}
+/* DEPOSIT AMOUNT */

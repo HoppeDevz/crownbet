@@ -1,10 +1,9 @@
 import { NextFunction, Request, Response } from 'express';
-import { createConnection } from 'typeorm';
+import { getManager, getRepository } from 'typeorm';
 import jwt from 'jsonwebtoken';
 import ParamsController from './ParamsController';
 import User from '../entity/User';
 import config from '../config';
-import Balance from '../entity/Balance';
 
 class UserController {
 
@@ -33,53 +32,51 @@ class UserController {
 
             if (err) return res.status(500).send(err.message);
 
-            createConnection().then(async connection => {
-
-                const alreadyUsername = await connection
-                .getRepository(User)
-                .createQueryBuilder("user")
-                .where("user.username = :username", { username })
-                .getOne();
-
-                const alreadyEmail = await connection
-                .getRepository(User)
-                .createQueryBuilder("user")
-                .where("user.email = :email", { email })
-                .getOne();
+            
+            getRepository(User)
+            .createQueryBuilder("user")
+            .where("user.username = :username", { username })
+            .getOne()
+            .then(alreadyUsername => {
 
                 if (alreadyUsername) {
 
                     res.status(400).send({
                         message: "Username already in use!"
                     });
-
-                    return connection.close();
                 }
+                
+                getRepository(User)
+                .createQueryBuilder("user")
+                .where("user.email = :email", { email })
+                .getOne()
+                .then(alreadyEmail => {
 
-                if (alreadyEmail) {
+                    
+                    if (alreadyEmail) {
 
-                    res.status(400).send({
-                        message: "Email already in use!"
+                        res.status(400).send({
+                            message: "Email already in use!"
+                        });
+                    }
+
+
+                    const user = new User();
+
+                    user.username = username;
+                    user.email = email;
+                    user.password = password;
+                    user.balance = 0.0;
+                    user.created_at = new Date();
+                    user.updated_at = new Date();
+        
+                    getManager().save(user).then(createdUser => {
+
+                        res.status(200).send({ message: "User created!" });
                     });
-
-                    return connection.close();
-                }
-
-                const user = new User();
-
-                user.username = username;
-                user.email = email;
-                user.password = password;
-                user.balance = 0.0;
-                user.created_at = new Date();
-                user.updated_at = new Date();
-
-                await connection.manager.save(user);
-
-                res.status(200).send({ message: "User created!" });
-
-                return connection.close();
-            })
+                    
+                });
+            });
         });
     }
 
@@ -88,23 +85,22 @@ class UserController {
         const email = req.headers['x-email'] || "";
         const password = req.headers['x-password'] || "";
 
-        createConnection().then(async connection => {
 
-            const user = await connection
-            .getRepository(User)
-            .createQueryBuilder()
-            .where("email = :email", { email })
-            .getOne();
-
-            if (!user) return res.status(404).send({ message: "User not found!" }) && connection.close();
+        getRepository(User)
+        .createQueryBuilder()
+        .where("email = :email", { email })
+        .getOne()
+        .then(user => {
+            
+            if (!user) return res.status(404).send({ message: "User not found!" });
 
             const isCorrectPassword = user.password == password;
 
-            if (!isCorrectPassword) return res.status(404).send({ message: "User not found!" }) && connection.close();
+            if (!isCorrectPassword) return res.status(404).send({ message: "User not found!" });
 
             const token = jwt.sign({ id: user.id }, config.JWT_SECRET, { expiresIn: "1h" });
 
-            return res.status(200).send({ token }) && connection.close();
+            return res.status(200).send({ token }); 
         });
     }
 
@@ -128,21 +124,17 @@ class UserController {
 
         const { id: user_id } = req.body.decoded;
 
-        console.log({ user_id });
 
-        createConnection().then(async connection => {
-
-            const user = await connection
-            .getRepository(User)
-            .createQueryBuilder()
-            .where("id = :user_id", { user_id })
-            .getOne();
-
-            if (user) return res.status(200).send({ balance: user.balance }) && connection.close();
-            
-            return res.status(404).send({ message: "User not found!" }) && connection.close();
-            
-        });
+        getRepository(User)
+        .createQueryBuilder()
+        .where("id = :user_id", { user_id })
+        .getOne()
+        .then(user => {
+           
+            if (user) return res.status(200).send({ balance: user.balance });
+        
+            return res.status(404).send({ message: "User not found!" });
+        }); 
     }
 }
 

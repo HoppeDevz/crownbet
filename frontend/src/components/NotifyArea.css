@@ -1,0 +1,48 @@
+.notify-container {
+    position: fixed;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    top: 90px;
+    right: 20px;
+
+    z-index: 10000;
+}
+.notify-container .notify-sucess {
+    min-width: 250px;
+
+    color: white;
+
+    padding: 10px 5px;
+    margin: 10px 0px;
+
+    text-align: center;
+
+    background-color: seagreen;
+    border: 1px solid springgreen;
+    border-radius: 5px;
+
+    animation: fadeIn .3s;
+    animation: slideFromRight .3s;
+}
+.notify-container .notify-err {
+    min-width: 250px;
+
+    color: white;
+
+    text-align: center;
+
+    padding: 10px 25px;
+    margin: 10px 0px;
+
+    background-color: crimson;
+    border: 1px solid red;
+    border-radius: 5px;
+
+    animation: fadeIn .3s;
+    animation: slideFromRight .3s;
+}

@@ -11,8 +11,7 @@
 
     background-color: rgba(0, 0, 0, 0.4);
 
-    z-index: 999;
-
+    z-index: 1000;
     animation: fadeIn .3s;
 }
 .account-modal-wrapper .modal {
@@ -103,6 +102,7 @@
     color: var(--yellow-00);
 }
 .account-modal-wrapper .modal .modal-title .desc {
+    font-weight: 300;
     font-size: 18px;
     color: white;
 }
@@ -214,29 +214,4 @@
 
     border-radius: 4px;
 }
-
-
 /* MODAL FORM */
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* KEYFRAMES */
-@keyframes fadeIn {
-    from { opacity: 0%; }
-    to { opacity: 100%; }
-}
-@keyframes scaleIn {
-    from { transform: scale(0.0); }
-    to { transform: scale(1.0); }
-}
-/* KEYFRAMES */
